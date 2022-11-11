@@ -1,11 +1,8 @@
 const mymap = L.map('checkinMap').setView([0, 0], 1);
-const attribution =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-//const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const tileUrl =
-  'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png';
-const tiles = L.tileLayer(tileUrl, { attribution });
-tiles.addTo(mymap);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(mymap);
 
 getData();
 

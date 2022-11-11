@@ -1,21 +1,24 @@
 
- 
- 
-  if ("geolocation" in navigator) {
+//geo locate
+console.log('hello')
+if ("geolocation" in navigator) {
     console.log("geolocation available")
     navigator.geolocation.getCurrentPosition(async (position) => {
       let lat, lon, weather, air
       try{
       lat = position.coords.latitude
+      console.log('hello')
       lon = position.coords.longitude
       document.getElementById("latitude").textContent = lat.toFixed(2)
       document.getElementById("longitude").textContent = lon.toFixed(2)
-    const apiUrl=`weather/${lat},${lon}`
-    
-    const res = await fetch(apiUrl)
+     const apiUrl=`weather/${lat},${lon}`
+     const res = await fetch(apiUrl)
      const json = await res.json()
+  
      weather = json.weather
-     air = json.ai_quality.results[0].measurements[0]
+
+      air = json.ai_quality.results[0].measurements[0]
+
       document.getElementById("description").textContent = weather.weather[0].description
       document.getElementById("temperature").textContent = weather.main.temp
       document.getElementById("aq_parameter").textContent = air.parameter

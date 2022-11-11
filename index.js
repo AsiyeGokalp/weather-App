@@ -1,12 +1,15 @@
-const express = require("express");
-const Datastore = require("nedb");
-const fetch = require('node-fetch')
-require('dotenv').config()
+import express from "express";
+import Datastore from "nedb";
+import fetch from 'node-fetch'
+import dotenv from 'dotenv'
+dotenv.config()
 
 
 
 const app = express();
+
 app.listen(3000, () => console.log("listening at 3000"));
+
 app.use(express.static("public"));
 app.use(express.json());
 
@@ -23,13 +26,13 @@ app.get("/api", (req, res) => {
   });
 });
 
-app.post("/api", (request, response) => {
+app.post("/api", (req, res) => {
   console.log("I got a request!");
-  const data = request.body;
+  const data = req.body;
   const timestamp = Date.now();
   data.timestamp = timestamp;
   database.insert(data);
-  response.json(data);
+  res.json(data);
 });
 
 
@@ -44,7 +47,7 @@ const weatherUrl=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon
 const weatherResponse = await fetch(weatherUrl)
 const weatherData = await weatherResponse.json()
 
-const aqUrl = `https://api.openaq.org/v1/latest?coorinates = ${lat},${lon}`
+const aqUrl = `https://api.openaq.org/v1/latest?coordinates = ${lat},${lon}`
 const aqResponse = await fetch(aqUrl)
 const aqData = await aqResponse.json()
 const data = {
